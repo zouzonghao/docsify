@@ -784,16 +784,110 @@ echo "####### 自动Git完成 #######"
 sleep 2
 ```
 
-## 一个本地，多个远程
+## 1、一个本地，多个远程
 
-## github token
+从特定远程仓库推拉
+
+```
+git push <url> master
+```
+
+Ω
+
+### 准备工作
+
+好，我们先来看下完成这篇文章的学习需要准备哪些东西。自然是一个本地的git仓库。
+
+```
+mkdir git-test
+cd git-test
+git init
+touch README.md 
+```
+
+执行了这几行命令之后，我们还需要在Github和码云上分别新建两个远程仓库。到这里我们就有了一个和小代差不多的本地环境。下面我们就一起来看下小代是通过怎样的操作来实现陈BOSS的需求的。
+
+### 小代的操作
+
+首先小代思考的是如何在一个项目中添加两个远程仓库。经过一番搜索，小代知道了下面的命令可以给仓库添加远程仓库。
+
+```
+git remote add [shortname] [url] 
+```
+
+> PS：我们解释一下这行命令的两个参数，第一个参数其实就是我们后面推送到这个远程仓库的时候都使用这个名称来代替仓库地址，第二个参数就是远程仓库的地址了，这句命令应该很好理解。
+
+然后小代就在本地仓库根目录执行了下面两行命令，为本地仓库添加了两个远程仓库。
+
+```
+git remote add gitee https://gitee.com/gancy/git-test.git
+git remote add github https://github.com/ganchaoyang/git-test.git 
+```
+
+然后我们修改README文件后，可以分别往两个仓库推送代码。
+
+```
+git add *
+git commit -m "first commit"
+git push -u github master
+git push -u gitee master 
+```
+
+通过两句`git push`命令我们确实可以向两个远程仓库推送代码，但是作为一个喜欢偷懒的程序员的小代同学绝不满足于此，于是他就想有没有一种方式可以一句命令就同时push到两个远程仓库。于是乎就有了下面的操作。小代修改了.git/config文件中的内容。原文件内容如下：
+
+```
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "gitee"]
+	url = https://gitee.com/gancy/git-test.git
+	fetch = +refs/heads/*:refs/remotes/gitee/*
+[remote "github"]
+	url = https://github.com/ganchaoyang/git-test.git
+	fetch = +refs/heads/*:refs/remotes/github/*
+[branch "master"]
+	remote = gitee
+	merge = refs/heads/master 
+```
+
+修改后的内容为：
+
+```
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://gitee.com/gancy/git-test.git
+    url = https://github.com/ganchaoyang/git-test.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master 
+```
+
+只是将两个`remote`合并成了一个而已，然后再执行`git push`命令就会发现，会一次性向两个仓库`push`代码了。
+
+## 2、github token
+
+**1.github在2021年8月14日七夕这天搞事情，如果这天你提交了github代码报错如下**：
+
+Support for password authentication was removed on August 13, 2021_IT博客技术分享的博客-CSDN博客
+
 
 **1.github在2021年8月14日七夕这天搞事情，如果这天你提交了github代码报错如下**：
 
 问题：remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
-![](:/84d0db463633436b86b8fbc9b29070b6)
+![](linux.assets/84d0db463633436b86b8fbc9b29070b6.png)
 
- 大概意思就是`你原先的密码凭证从2021年8月13日`开始就不能用了，`必须使用个人访问令牌（personal access token）`，就是把你的`密码`替换成`token`！
+ 大概意思就是`你原先的密码凭证从2021年8月13日`开始就不能用了，`必须使用个人访问令牌（personal access token）`，就是把你的`密码`替换成`token`！
 
 **2.为什么要把密码换成token**
 
@@ -809,19 +903,19 @@ sleep 2
 
 随机：令牌不需要记住或定期输入的更简单密码可能会受到的字典类型或蛮力尝试的影响
 
-**2.2 如何生成自己的token**
+**2.2 如何生成自己的token**
 
 登录自己的github账号，个人设置那里
 
-![](:/c357d5fba5ff4847874825a7b7de5264)
+![](linux.assets/c357d5fba5ff4847874825a7b7de5264.png)
 
-** 2.3 选择开发者设置 `Developer setting`**
+** 2.3 选择开发者设置 `Developer setting`**
 
-![](:/6a9d65ec1261489fab03a5e8160b0568)
+![](linux.assets/6a9d65ec1261489fab03a5e8160b0568.png)
 
-** 2.4 选择个人访问令牌 `Personal access tokens`，然后选中生成令牌 `Generate new token`**
+** 2.4 选择个人访问令牌 `Personal access tokens`，然后选中生成令牌 `Generate new token`**
 
-![](:/71089395a6f04902b87e8fbb0f62c2e8)
+![](linux.assets/71089395a6f04902b87e8fbb0f62c2e8.png)
 
 **2.5 设置token的有效期，访问权限等**
 
@@ -831,13 +925,13 @@ sleep 2
 - 要使用`token`从命令行删除仓库，请选择`delete_repo`
 - 其他根据需要进行勾选
 
-![](:/04f4464d28064c49adf50c5c3b05e6c7)**2.6  最后生成令牌 `Generate token`**
+![](data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 962 619"></svg>)**2.6  最后生成令牌 `Generate token`**
 
-![](:/fc798dd2d9cf4c2092f7d05b3c223b80)
+![](linux.assets/fc798dd2d9cf4c2092f7d05b3c223b80.png)
 
-** 2.7 生成后的token如下：**
+** 2.7 生成后的token如下：**
 
-![](:/271e3904bf674cb09b95ecc3f065817e)
+![](linux.assets/271e3904bf674cb09b95ecc3f065817e.png)
 
 **`注意：`**
 
@@ -855,8 +949,22 @@ sleep 2
 
 **例如：（全局设置某一个仓库的 token）以后每次提交都不需要账户和密码了**
 
- git remote set-url origin https://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@github.com/**github的用户名**/**仓库名称**.git
+ git remote set-url origin https://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@github.com/**github的用户名**/**仓库名称**.git
 
-最后提交 直接输入： git push     
+最后提交 直接输入： git push     
 
 就不用输入账户和密码了。
+
+
+
+# 25、七牛云
+
+![tu](http://rqfv95cdi.hn-bkt.clouddn.com/notes/iShot_2023-02-13_20.02.39.png)
+
+
+
+![iShot_2023-02-15_01.20.35](http://rqfv95cdi.hn-bkt.clouddn.com/notes/iShot_2023-02-15_01.20.35.png)
+
+123
+
+![](http://rqfv95cdi.hn-bkt.clouddn.com/notes/iShot_2023-02-13_20.02.39-20230222011232716.png)

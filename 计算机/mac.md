@@ -5,3 +5,10 @@
 # 2、快捷键
 
 显示隐藏文件 command + Shift + .
+
+# 3、文件已损坏！
+
+```
+sudo xattr -d com.apple.quarantine <应用路径>
+```
+
