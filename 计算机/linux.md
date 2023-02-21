@@ -633,6 +633,14 @@ https://apt.syncthing.net/
 
 把监听地址改成0.0.0.0:8384
 
+```
+http://192.3.128.27:8384/#
+root
+admin
+```
+
+
+
 # 20、minimalist-web-notepad
 
 ```
