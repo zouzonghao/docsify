@@ -634,7 +634,7 @@ https://apt.syncthing.net/
 把监听地址改成0.0.0.0:8384
 
 ```
-http://192.3.128.27:8384/#
+http://:8384/#
 root
 admin
 ```
@@ -960,4 +960,19 @@ git remote set-url origin https://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@githu
 就不用输入账户和密码了。
 
 
+
+# 25、VoceChat
+
+```
+docker run -d --restart=always \
+  -p 44321:3000 \
+  --name vocechat-server \
+  -v /docker/vocechat-server/data:/home/vocechat-server/data \
+  privoce/vocechat-server:latest
+```
+
+```
+admin@z
+Zzh125475
+```
 
