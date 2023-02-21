@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 cd /Users/macm2/Desktop/docsify/sanqiz37
 git status
 echo "####### 开始自动Git #######"
