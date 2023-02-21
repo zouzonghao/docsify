@@ -714,6 +714,46 @@ scp -r 文件夹目录 用户名@服务器ip:目标路径
 
 # 23、docsify
 
+https://docsify.js.org/#/zh-cn/
+
+Index.html
+
+```html
+!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css">
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+        loadSidebar: true,
+        subMaxLevel: 2
+    }
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+</body>
+</html>
+```
+
+侧边栏：
+
+_sidebar.md
+
+```
+* [首页](/)
+* [计算机]()
+    * [linux](/计算机/linux)
+```
+
+自动找readme.md
+
+
+
 Voce chat
 
 docker 
@@ -722,7 +762,7 @@ Iterm2 ok
 
 joplin
 
-[为知笔记](https://www.bilibili.com/video/BV14L4y1h7DH/?spm_id_from=333.337.search-card.all.click&vd_source=b8f96a32c9e43ab668335b4760d1064b)
+
 
 markdown+git +docsify
 
