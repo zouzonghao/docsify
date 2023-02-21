@@ -794,7 +794,7 @@ git push <url> master
 
 Ω
 
-### 准备工作
+**准备工作**
 
 好，我们先来看下完成这篇文章的学习需要准备哪些东西。自然是一个本地的git仓库。
 
@@ -807,7 +807,7 @@ touch README.md
 
 执行了这几行命令之后，我们还需要在Github和码云上分别新建两个远程仓库。到这里我们就有了一个和小代差不多的本地环境。下面我们就一起来看下小代是通过怎样的操作来实现陈BOSS的需求的。
 
-### 小代的操作
+**小代的操作**
 
 首先小代思考的是如何在一个项目中添加两个远程仓库。经过一番搜索，小代知道了下面的命令可以给仓库添加远程仓库。
 
@@ -925,7 +925,7 @@ Support for password authentication was removed on August 13, 2021_IT博客技�
 - 要使用`token`从命令行删除仓库，请选择`delete_repo`
 - 其他根据需要进行勾选
 
-![](data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 962 619"></svg>)**2.6  最后生成令牌 `Generate token`**
+![image-20230222021034490](linux.assets/image-20230222021034490.png)**2.6  最后生成令牌 `Generate token`**
 
 ![](linux.assets/fc798dd2d9cf4c2092f7d05b3c223b80.png)
 
@@ -941,7 +941,9 @@ Support for password authentication was removed on August 13, 2021_IT博客技�
 
 **也可以 把token直接添加远程仓库链接中，这样就可以避免同一个仓库每次提交代码都要输入token了：**
 
-**git remote set-url origin https://&lt;your_token&gt;@github.com/&lt;USERNAME&gt;/&lt;REPO&gt;.git**
+```
+git remote set-url origin https://<your_token>@github.com/<USERNAME>/<REPO>.git
+```
 
 **&lt;your_token&gt;：换成你自己得到的token
 &lt;USERNAME&gt;：是你自己github的用户名
@@ -949,7 +951,9 @@ Support for password authentication was removed on August 13, 2021_IT博客技�
 
 **例如：（全局设置某一个仓库的 token）以后每次提交都不需要账户和密码了**
 
- git remote set-url origin https://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@github.com/**github的用户名**/**仓库名称**.git
+```
+git remote set-url origin https://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@github.com/**github的用户名**/**仓库名称**.git
+```
 
 最后提交 直接输入： git push     
 
@@ -957,14 +961,3 @@ Support for password authentication was removed on August 13, 2021_IT博客技�
 
 
 
-# 25、七牛云
-
-![tu](http://rqfv95cdi.hn-bkt.clouddn.com/notes/iShot_2023-02-13_20.02.39.png)
-
-
-
-![iShot_2023-02-15_01.20.35](http://rqfv95cdi.hn-bkt.clouddn.com/notes/iShot_2023-02-15_01.20.35.png)
-
-123
-
-![](http://rqfv95cdi.hn-bkt.clouddn.com/notes/iShot_2023-02-13_20.02.39-20230222011232716.png)
