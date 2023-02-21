@@ -712,7 +712,7 @@ scp 文件名 用户名@服务器ip:目标路径
 scp -r 文件夹目录 用户名@服务器ip:目标路径
 ```
 
-
+# 23、docsify
 
 Voce chat
 
@@ -724,6 +724,21 @@ joplin
 
 [为知笔记](https://www.bilibili.com/video/BV14L4y1h7DH/?spm_id_from=333.337.search-card.all.click&vd_source=b8f96a32c9e43ab668335b4760d1064b)
 
-
-
 markdown+git +docsify
+
+Mac git 脚本：
+
+```shell
+#!/bin/bash
+cd /Users/macm2/Desktop/sanqiz37
+git status
+echo "####### 开始自动Git #######"
+current_time=$(date "+%Y/%m/%d -%H:%M:%S") # 获取当前时间
+echo ${current_time} # 显示当前时间
+git add .
+git commit -m "modified ${current_time}" # 远程仓库可以看到是什么时间修改的...
+git push 
+echo "####### 自动Git完成 #######"
+sleep 2
+```
+
