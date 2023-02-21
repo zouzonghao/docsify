@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /Users/macm2/Desktop/sanqiz37
+cd /Users/macm2/Desktop/notes
 git status
 echo "####### 开始自动Git #######"
 current_time=$(date "+%Y/%m/%d -%H:%M:%S") # 获取当前时间

@@ -726,6 +726,8 @@ joplin
 
 markdown+git +docsify
 
+# 24、git
+
 Mac git 脚本：
 
 ```shell
@@ -742,3 +744,79 @@ echo "####### 自动Git完成 #######"
 sleep 2
 ```
 
+## 一个本地，多个远程
+
+## github token
+
+**1.github在2021年8月14日七夕这天搞事情，如果这天你提交了github代码报错如下**：
+
+问题：remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.
+![](:/84d0db463633436b86b8fbc9b29070b6)
+
+ 大概意思就是`你原先的密码凭证从2021年8月13日`开始就不能用了，`必须使用个人访问令牌（personal access token）`，就是把你的`密码`替换成`token`！
+
+**2.为什么要把密码换成token**
+
+**2.1 修改为token的好处**
+
+令牌（token）与基于密码的身份验证相比，令牌提供了许多安全优势：
+
+唯一： 令牌特定于 [GitHub](https://so.csdn.net/so/search?q=GitHub&spm=1001.2101.3001.7020)，可以按使用或按设备生成
+
+可撤销：可以随时单独撤销令牌，而无需更新未受影响的凭据
+
+有限 ： 令牌可以缩小范围以仅允许用例所需的访问
+
+随机：令牌不需要记住或定期输入的更简单密码可能会受到的字典类型或蛮力尝试的影响
+
+**2.2 如何生成自己的token**
+
+登录自己的github账号，个人设置那里
+
+![](:/c357d5fba5ff4847874825a7b7de5264)
+
+** 2.3 选择开发者设置 `Developer setting`**
+
+![](:/6a9d65ec1261489fab03a5e8160b0568)
+
+** 2.4 选择个人访问令牌 `Personal access tokens`，然后选中生成令牌 `Generate new token`**
+
+![](:/71089395a6f04902b87e8fbb0f62c2e8)
+
+**2.5 设置token的有效期，访问权限等**
+
+选择要授予此`令牌token`的`范围`或`权限`。
+
+- 要使用`token`从命令行访问仓库，请选择`repo`。
+- 要使用`token`从命令行删除仓库，请选择`delete_repo`
+- 其他根据需要进行勾选
+
+![](:/04f4464d28064c49adf50c5c3b05e6c7)**2.6  最后生成令牌 `Generate token`**
+
+![](:/fc798dd2d9cf4c2092f7d05b3c223b80)
+
+** 2.7 生成后的token如下：**
+
+![](:/271e3904bf674cb09b95ecc3f065817e)
+
+**`注意：`**
+
+记得把你的**token**保存下来，因为你再次刷新网页的时候，你已经没有办法看到它了，所以我还没有彻底搞清楚这个**`token`**的使用，后续还会继续探索！
+
+**3\. 之后用自己生成的`token`登录，把上面生成的`token`粘贴到`输入密码的位置`，然后成功push代码！**
+
+**也可以 把token直接添加远程仓库链接中，这样就可以避免同一个仓库每次提交代码都要输入token了：**
+
+**git remote set-url origin https://&lt;your_token&gt;@github.com/&lt;USERNAME&gt;/&lt;REPO&gt;.git**
+
+**&lt;your_token&gt;：换成你自己得到的token
+&lt;USERNAME&gt;：是你自己github的用户名
+&lt;REPO&gt;：是你的仓库名称**
+
+**例如：（全局设置某一个仓库的 token）以后每次提交都不需要账户和密码了**
+
+ git remote set-url origin https://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@github.com/**github的用户名**/**仓库名称**.git
+
+最后提交 直接输入： git push     
+
+就不用输入账户和密码了。
