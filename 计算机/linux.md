@@ -909,11 +909,11 @@ Support for password authentication was removed on August 13, 2021_IT博客技�
 
 ![](linux.assets/c357d5fba5ff4847874825a7b7de5264.png)
 
-** 2.3 选择开发者设置 `Developer setting`**
+**2.3 选择开发者设置 `Developer setting`**
 
 ![](linux.assets/6a9d65ec1261489fab03a5e8160b0568.png)
 
-** 2.4 选择个人访问令牌 `Personal access tokens`，然后选中生成令牌 `Generate new token`**
+**2.4 选择个人访问令牌 `Personal access tokens`，然后选中生成令牌 `Generate new token`**
 
 ![](linux.assets/71089395a6f04902b87e8fbb0f62c2e8.png)
 
@@ -929,7 +929,7 @@ Support for password authentication was removed on August 13, 2021_IT博客技�
 
 ![](linux.assets/fc798dd2d9cf4c2092f7d05b3c223b80.png)
 
-** 2.7 生成后的token如下：**
+**2.7 生成后的token如下：**
 
 ![](linux.assets/271e3904bf674cb09b95ecc3f065817e.png)
 
@@ -974,9 +974,5 @@ docker run -d --restart=always \
 ```
 admin@z
 Zzh125475
-```
-
-```
-http://5600.sanqi.one:44321/?magic_token=bb3bd6d258ec7f4b50336506418c815c956c83e403988ca100ba14bb2da9da8c0000000000000600000000000000383038303036232af563000000000000#/register
 ```
 
