@@ -8,7 +8,7 @@
 
 记录一些问题和解决办法
 
-- [linux](/计算机/linux)
+- [linux](/计算机/linux.md)
 
-- [mac](/计算机/mac)
+- [mac](/计算机/mac.md)
 
