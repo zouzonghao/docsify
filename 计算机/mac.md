@@ -16,7 +16,7 @@ sudo xattr -d com.apple.quarantine <应用路径>
 
 # 4、filebrowser
 
-添加脚本
+添加脚本,mac后台运行
 
 startup.sh
 

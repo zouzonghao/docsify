@@ -176,63 +176,445 @@ docker pull codehi/nginx:v1 拉取自己仓库的nginx镜像
 ​	docker stop `docker ps -a -q` 停止所有容器
 
 8. docker rm
-删除一个或多个容器
-docker rm mynginx 删除容器mynginx,正在运行中的容器需要stop后才能删除，或者使用强制删除。
-docker rm -f mynginx 强制删除运行中的容器mynginx
-docker rm `docker ps -a -q` 删除所有容器
-
+  删除一个或多个容器
+  docker rm mynginx 删除容器mynginx,正在运行中的容器需要stop后才能删除，或者使用强制删除。
+  docker rm -f mynginx 强制删除运行中的容器mynginx
+  docker rm `docker ps -a -q` 删除所有容器
 9. docker rmi
-删除本地一个或多个镜像
-docker rmi codehi/nginx:v1 删除镜像codehi/nginx:v1
-docker rmi -f codehi/nginx:v1 强制删除
-docker rmi `docker images -q` 删除所有镜像
-
+  删除本地一个或多个镜像
+  docker rmi codehi/nginx:v1 删除镜像codehi/nginx:v1
+  docker rmi -f codehi/nginx:v1 强制删除
+  docker rmi `docker images -q` 删除所有镜像
 10. docker logs
-获取容器的日志
-docker logs -f mynginx 跟踪容器mynginx的日志，实时输出的。
-
+    获取容器的日志
+    docker logs -f mynginx 跟踪容器mynginx的日志，实时输出的。
 11. docker history
-查看指定镜像的创建历史
-docker history codehi/nginx:v1 查看本地镜像codehi/nginx:v1的创建历史
-
+    查看指定镜像的创建历史
+    docker history codehi/nginx:v1 查看本地镜像codehi/nginx:v1的创建历史
 12. docker login
-登陆到一个Docker镜像仓库，如果未指定镜像仓库地址，默认为官方仓库 Docker Hub
-docker login 登录至Docker Hub，下一步会提示输入账号密码
-
+    登陆到一个Docker镜像仓库，如果未指定镜像仓库地址，默认为官方仓库 Docker Hub
+    docker login 登录至Docker Hub，下一步会提示输入账号密码
 13. docker logout
-登出Docker Hub
-
+    登出Docker Hub
 14. docker push
-将本地的镜像上传到镜像仓库,要先登陆到镜像仓库
-docker push codehi/nginx:v1 将本地镜像codehi/nginx:v1镜像推送到docker hub仓库中
-
+    将本地的镜像上传到镜像仓库,要先登陆到镜像仓库
+    docker push codehi/nginx:v1 将本地镜像codehi/nginx:v1镜像推送到docker hub仓库中
 15. docker commit
-从容器创建一个新的镜像
-docker commit -a "codehui" -m "test" 3218b3ad4e47 codehi/nginx:v1 3218b3ad4e47 保存为新的镜像codehi/nginx:v1,并添加提交人信息(codehui)和说明信息(test)
-
+    从容器创建一个新的镜像
+    docker commit -a "codehui" -m "test" 3218b3ad4e47 codehi/nginx:v1 3218b3ad4e47 保存为新的镜像codehi/nginx:v1,并添加提交人信息(codehui)和说明信息(test)
 16. docker tag
-标记本地镜像，将其归入某一仓库
-docker tag nginx:v1 codehi/nginx:v2 将镜像nginx:v1标记为 codehi/nginx:v2 镜像
-
+    标记本地镜像，将其归入某一仓库
+    docker tag nginx:v1 codehi/nginx:v2 将镜像nginx:v1标记为 codehi/nginx:v2 镜像
 17. docker save
-将指定镜像保存成 tar 归档文件
-docker save -o codehi-nginx-v1.tar codehi/nginx:v1 将镜像codehi/nginx:v1生成codehi-nginx-v1.tar归档文件
-
+    将指定镜像保存成 tar 归档文件
+    docker save -o codehi-nginx-v1.tar codehi/nginx:v1 将镜像codehi/nginx:v1生成codehi-nginx-v1.tar归档文件
 18. docker load
-从归档文件中创建镜像
-docker load -i codehi-nginx-v1.tar 从镜像归档文件codehi-nginx-v1.tar创建镜像
-
+    从归档文件中创建镜像
+    docker load -i codehi-nginx-v1.tar 从镜像归档文件codehi-nginx-v1.tar创建镜像
 19. docker export
-将文件系统作为一个tar归档文件导出到STDOUT
-docker export -o codehi-nginx-v1.tar mynginx 将容器mynginx保存为tar文件。
-
+    将文件系统作为一个tar归档文件导出到STDOUT
+    docker export -o codehi-nginx-v1.tar mynginx 将容器mynginx保存为tar文件。
 20. docker import
-从归档文件中创建镜像
-docker import codehi-nginx-v1.tar codehi-nginx-v1 从镜像归档文件codehi-nginx-v1.tar创建镜像，命名为codehi-nginx-v1
-
+    从归档文件中创建镜像
+    docker import codehi-nginx-v1.tar codehi-nginx-v1 从镜像归档文件codehi-nginx-v1.tar创建镜像，命名为codehi-nginx-v1
 21. docker kill
-杀掉一个运行中的容器
-docker kill -s KILL mynginx 杀掉运行中的容器mynginx
+    杀掉一个运行中的容器
+    docker kill -s KILL mynginx 杀掉运行中的容器mynginx
+
+## **1.run 的各种参数**
+
+```
+1.    run [OPTIONS] IMAGE [COMMOND] [ARGS...]   
+3.  # OPTIONS 说明   
+4.  	--name="容器新名字": 为容器指定一个名称； 
+5.  	-d: 后台运行容器，并返回容器ID，也即启动守护式容器；
+6.  	-i：以交互模式运行容器，通常与 -t 同时使用；    
+7.  	-t：为容器重新分配一个伪输入终端，通常与 -i 同时使用；    
+8.  	-P: 随机端口映射；    
+9.  	-p: 指定端口映射，有以下四种格式    
+10. 	      ip:hostPort:containerPort    
+11. 	      ip::containerPort    
+12. 	      hostPort:containerPort    
+13. 	      containerPort    
+14.   -w: 指定命令执行时，所在的路径 
+17. # IMAGE    
+18. _IMAGE_NAME:XXX_IMAGE_VER    
+21. # COMAND    
+22. 例：mvn -Duser.home=xxx -B clean package -Dmaven.test.skip=true
+```
+
+\-\-\-
+
+```
+1.  常用OPTIONS补足：  
+2.  --name：容器名字 
+3.  --network：指定网络
+4.  --rm：容器停止自动删除容器   
+6.  -i：--interactive,交互式启动    
+7.  -t：--tty，分配终端    
+8.  -v：--volume,挂在数据卷    
+9.  -d：--detach，后台运行
+```
+
+--\- （-w 在run中，貌似也可直接使用）
+
+```
+1.  在已运行的容器中运行命令   
+2.   exec [OPTIONS] CONTAINER COMMAND [ARG…]    
+3.  常用选项：    
+4.  -d：--detach ，后台运行命令    
+5.  -e, --env list             设置env    
+6.  -i, --interactive         启用交互式    
+7.  -t, --tty                     启用终端    
+8.  -u, --user string        指定用户 (格式: <name|uid>[:<group|gid>])    
+9.  -w, --workdir string       指定工作目录
+```
+
+\-\-\-
+
+**在容器内执行/**bin/bash**命令**
+
+```
+1.  # eg: 使用镜像centos:latest以交互模式启动一个容器,在容器内执行/bin/bash命令。
+2.   run -it centos /bin/bash  
+```
+
+## **2.1.docker -v 挂载 （目录）**
+
+      我们可以多次挂载
+
+                    ・挂载maven
+
+　　　　　  ・挂载jenkins
+
+    相关资料
+
+      [（十）Docker-V 详解 - sixinshuier - 博客园](https://www.cnblogs.com/shix0909/p/11124466.html "（十）Docker-V 详解 - sixinshuier - 博客园")
+
+      [docker -v 挂载问题：\_hnmpf的博客-CSDN博客\_docker-v](https://blog.csdn.net/hnmpf/article/details/80924494 "docker -v 挂载问题：_hnmpf的博客-CSDN博客_docker-v")
+
+```
+1.  譬如我要启动一个centos容器，宿主机的/test目录挂载到容器的/soft目录，可通过以下方式指定：
+  
+3.  # docker run -it -v /test:/soft centos /bin/bash
+    
+5.  冒号":"前面的目录是宿主机目录，后面的目录是容器内目录。
+```
+
+[关于Docker目录挂载的总结 - iVictor - 博客园](https://www.cnblogs.com/ivictor/p/4834864.html "关于Docker目录挂载的总结 - iVictor - 博客园")
+
+```
+1.  关于Docker目录挂载的总结
+    
+3.  # docker run -it -v /test:/soft centos /bin/bash
+    
+5.  一、容器目录不可以为相对路径
+    
+7.  二、宿主机目录如果不存在，则会自动生成
+    
+9.  # docker run -it -v test1:/soft centos /bin/bash
+    
+11. 三、宿主机的目录如果为相对路
+    
+12. ・容器内的/soft目录挂载的是宿主机上的/var/lib/docker/volumes/test1/_data目录
+    
+14. ・所谓的相对路径指的是/var/lib/docker/volumes/，
+  
+15. 　　　　与宿主机的当前目录无关。    
+
+17. 四、如果在容器内修改了目录的属主和属组，那么对应的挂载点会跟着修改
+```
+
+・更多挂载目录的方法 （可以使用镜像直接挂载）
+
+[docker-修改容器的挂载目录三种方式\_zedelei的博客-CSDN博客\_docker修改挂载目录](https://blog.csdn.net/zedelei/article/details/90208183 "docker-修改容器的挂载目录三种方式_zedelei的博客-CSDN博客_docker修改挂载目录")
+
+## **2.2.docker -v 挂载 （Volume）**
+
+[Docker学习笔记（6）——Docker Volume - 简书](https://www.jianshu.com/p/ef0f24fd0674 "Docker学习笔记（6）——Docker Volume - 简书")
+
+**・基础**
+**Docker的数据持久化---数据不随着container的结束而结束，**
+数据存在于host机器上:（①或②中的一种）
+  ・①存在于host的某个指定目录中（使用bind mount），
+  ・②使用[docker](https://so.csdn.net/so/search?q=docker&spm=1001.2101.3001.7020)自己管理的volume（/var/lib/docker/volumes下）。
+
+
+**・Docker Volume例子**
+
+```
+1.  。。。
+2.  -v maven-repository-volume:/MyPoroject/mvn/.m2
+3.  。。。
+```
+
+**・查看【maven-repository-volume】的volume：**
+docker volume inspect my-volume
+
+**・注意：**
+host机器的目录路径必须为全路径(即需要以/或~/开始的路径)，
+不然docker会把这个目录当做volume
+
+
+## **3.docker --rm**
+
+容器退出时就能够自动清理容器内部的文件系统
+
+[docker run的--rm选项详解_大方子-CSDN博客_docker--rm](https://blog.csdn.net/nzjdsds/article/details/81981732 "docker run的--rm选项详解_大方子-CSDN博客_docker--rm")
+
+**Detached (-d)[🔗](https://docs.docker.com/engine/reference/run/#detached--d "🔗")**
+
+To start a container in detached mode, you use `-d=true` or just `-d` option. By design, containers started in detached mode exit when the root process used to run the container exits, unless you also specify the `--rm` option. If you use `-d` with `--rm`, the container is removed when it exits **or** when the daemon exits, whichever happens first.
+
+## **4.docker -w  -it**
+
+          Working directory inside the container
+
+```
+$ docker  run -w /path/to/dir/ -i -t  ubuntu pwd
+```
+
+he `-w` lets the command being executed inside directory given, here `/path/to/dir/`. If the path does not exist it is created inside the container.
+
+WORKDIR指令用于指定容器的一个目录， 容器启动时执行的命令会在该目录下执行。
+
+```
+1.  　　docker run -it -w <work_dir> <container_image_name> <command>
+    
+3.  　　示例:
+    
+5.  　　docker run -it -w /home/jello centos /bin/bash   
+```
+
+--
+
+■例子 （-w）
+
+   docker run --rm \
+
+     -v 指定 maven Repository \
+
+     -v 指定 Jenkins Home \
+
+     -w 打包对象工程所在目录 **CONTAINER\_IMAGE\_NAME:IMAGE_VER** \
+
+    mvn clean package
+
+## **5.docker -u**
+
+指定执行命令时，所使用的用户，不指定时，默认以root用户执行。
+
+指定时，指定的时ID，关于linux中的ID，参照下面文章中的No.37
+
+[Unix\_Linux\_常用命令总结_sun0322-CSDN博客](https://blog.csdn.net/sxzlc/article/details/107622786 "Unix_Linux_常用命令总结_sun0322-CSDN博客")
+
+## **6.docker -e**
+
+指定环境变量
+
+-e XXX_XXX="xxxxxxxxxxx"
+
+■关于每一行结尾的反斜线
+
+[Docker run reference | Docker Documentation](https://docs.docker.com/engine/reference/run/ "Docker run reference | Docker Documentation")
+
+<img width="645" height="220" src="linux.assets/847ca5b459054875bdd83547ccc03fca.png"/>
+
+## ■mvn命令行执行
+
+[在 命令行 (cmd)执行 Maven命令，对java工程进行打包 操作 (指定settings.xml)\_sun0322-CSDN博客\_命令行运行maven项目](https://blog.csdn.net/sxzlc/article/details/107529169 "在 命令行 (cmd)执行 Maven命令，对java工程进行打包 操作 (指定settings.xml)_sun0322-CSDN博客_命令行运行maven项目")
+
+## ■更多参数
+
+[docker常用命令总结 - Wshile - 博客园](https://www.cnblogs.com/Wshile/p/12988720.html "docker常用命令总结 - Wshile - 博客园")
+
+| Name, shorthand           | Default   | Description                                                  |
+| ------------------------- | --------- | ------------------------------------------------------------ |
+| `--add-host`              |           | Add a custom host-to-IP mapping (host:ip)                    |
+| `--attach , -a`           |           | Attach to STDIN, STDOUT or STDERR                            |
+| `--blkio-weight`          |           | Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0) |
+| `--blkio-weight-device`   |           | Block IO weight (relative device weight)                     |
+| `--cap-add`               |           | Add Linux capabilities                                       |
+| `--cap-drop`              |           | Drop Linux capabilities                                      |
+| `--cgroup-parent`         |           | Optional parent cgroup for the container                     |
+| `--cidfile`               |           | Write the container ID to the file                           |
+| `--cpu-count`             |           | CPU count (Windows only)                                     |
+| `--cpu-percent`           |           | CPU percent (Windows only)                                   |
+| `--cpu-period`            |           | Limit CPU CFS (Completely Fair Scheduler) period             |
+| `--cpu-quota`             |           | Limit CPU CFS (Completely Fair Scheduler) quota              |
+| `--cpu-rt-period`         |           | [API 1.25+](https://docs.docker.com/engine/api/v1.25/ "API 1.25+")<br>Limit CPU real-time period in microseconds |
+| `--cpu-rt-runtime`        |           | [API 1.25+](https://docs.docker.com/engine/api/v1.25/ "API 1.25+")<br>Limit CPU real-time runtime in microseconds |
+| `--cpu-shares , -c`       |           | CPU shares (relative weight)                                 |
+| `--cpus`                  |           | [API 1.25+](https://docs.docker.com/engine/api/v1.25/ "API 1.25+")<br>Number of CPUs |
+| `--cpuset-cpus`           |           | CPUs in which to allow execution (0-3, 0,1)                  |
+| `--cpuset-mems`           |           | MEMs in which to allow execution (0-3, 0,1)                  |
+| `--detach , -d`           |           | Run container in background and print container ID           |
+| `--detach-keys`           |           | Override the key sequence for detaching a container          |
+| `--device`                |           | Add a host device to the container                           |
+| `--device-cgroup-rule`    |           | Add a rule to the cgroup allowed devices list                |
+| `--device-read-bps`       |           | Limit read rate (bytes per second) from a device             |
+| `--device-read-iops`      |           | Limit read rate (IO per second) from a device                |
+| `--device-write-bps`      |           | Limit write rate (bytes per second) to a device              |
+| `--device-write-iops`     |           | Limit write rate (IO per second) to a device                 |
+| `--disable-content-trust` | `true`    | Skip image verification                                      |
+| `--dns`                   |           | Set custom DNS servers                                       |
+| `--dns-opt`               |           | Set DNS options                                              |
+| `--dns-option`            |           | Set DNS options                                              |
+| `--dns-search`            |           | Set custom DNS search domains                                |
+| `--domainname`            |           | Container NIS domain name                                    |
+| `--entrypoint`            |           | Overwrite the default ENTRYPOINT of the image                |
+| `--env , -e`              |           | Set environment variables                                    |
+| `--env-file`              |           | Read in a file of environment variables                      |
+| `--expose`                |           | Expose a port or a range of ports                            |
+| `--gpus`                  |           | [API 1.40+](https://docs.docker.com/engine/api/v1.40/ "API 1.40+")<br>GPU devices to add to the container (‘all’ to pass all GPUs) |
+| `--group-add`             |           | Add additional groups to join                                |
+| `--health-cmd`            |           | Command to run to check health                               |
+| `--health-interval`       |           | Time between running the check (ms\|s\|m\|h) (default 0s)    |
+| `--health-retries`        |           | Consecutive failures needed to report unhealthy              |
+| `--health-start-period`   |           | [API 1.29+](https://docs.docker.com/engine/api/v1.29/ "API 1.29+")<br>Start period for the container to initialize before starting health-retries countdown (ms\|s\|m\|h) (default 0s) |
+| `--health-timeout`        |           | Maximum time to allow one check to run (ms\|s\|m\|h) (default 0s) |
+| `--help`                  |           | Print usage                                                  |
+| `--hostname , -h`         |           | Container host name                                          |
+| `--init`                  |           | [API 1.25+](https://docs.docker.com/engine/api/v1.25/ "API 1.25+")<br>Run an init inside the container that forwards signals and reaps processes |
+| `--interactive , -i`      |           | Keep STDIN open even if not attached                         |
+| `--io-maxbandwidth`       |           | Maximum IO bandwidth limit for the system drive (Windows only) |
+| `--io-maxiops`            |           | Maximum IOps limit for the system drive (Windows only)       |
+| `--ip`                    |           | IPv4 address (e.g., 172.30.100.104)                          |
+| `--ip6`                   |           | IPv6 address (e.g., 2001:db8::33)                            |
+| `--ipc`                   |           | IPC mode to use                                              |
+| `--isolation`             |           | Container isolation technology                               |
+| `--kernel-memory`         |           | Kernel memory limit                                          |
+| `--label , -l`            |           | Set meta data on a container                                 |
+| `--label-file`            |           | Read in a line delimited file of labels                      |
+| `--link`                  |           | Add link to another container                                |
+| `--link-local-ip`         |           | Container IPv4/IPv6 link-local addresses                     |
+| `--log-driver`            |           | Logging driver for the container                             |
+| `--log-opt`               |           | Log driver options                                           |
+| `--mac-address`           |           | Container MAC address (e.g., 92:d0:c6:0a:29:33)              |
+| `--memory , -m`           |           | Memory limit                                                 |
+| `--memory-reservation`    |           | Memory soft limit                                            |
+| `--memory-swap`           |           | Swap limit equal to memory plus swap: ‘-1’ to enable unlimited swap |
+| `--memory-swappiness`     | `-1`      | Tune container memory swappiness (0 to 100)                  |
+| `--mount`                 |           | Attach a filesystem mount to the container                   |
+| `--name`                  |           | Assign a name to the container                               |
+| `--net`                   |           | Connect a container to a network                             |
+| `--net-alias`             |           | Add network-scoped alias for the container                   |
+| `--network`               |           | Connect a container to a network                             |
+| `--network-alias`         |           | Add network-scoped alias for the container                   |
+| `--no-healthcheck`        |           | Disable any container-specified HEALTHCHECK                  |
+| `--oom-kill-disable`      |           | Disable OOM Killer                                           |
+| `--oom-score-adj`         |           | Tune host’s OOM preferences (-1000 to 1000)                  |
+| `--pid`                   |           | PID namespace to use                                         |
+| `--pids-limit`            |           | Tune container pids limit (set -1 for unlimited)             |
+| `--platform`              |           | [experimental (daemon)](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file "experimental (daemon)")[API 1.32+](https://docs.docker.com/engine/api/v1.32/ "API 1.32+")<br>Set platform if server is multi-platform capable |
+| `--privileged`            |           | Give extended privileges to this container                   |
+| `--publish , -p`          |           | Publish a container’s port(s) to the host                    |
+| `--publish-all , -P`      |           | Publish all exposed ports to random ports                    |
+| `--read-only`             |           | Mount the container’s root filesystem as read only           |
+| `--restart`               | `no`      | Restart policy to apply when a container exits               |
+| `--rm`                    |           | Automatically remove the container when it exits             |
+| `--runtime`               |           | Runtime to use for this container                            |
+| `--security-opt`          |           | Security Options                                             |
+| `--shm-size`              |           | Size of /dev/shm                                             |
+| `--sig-proxy`             | `true`    | Proxy received signals to the process                        |
+| `--stop-signal`           | `SIGTERM` | Signal to stop a container                                   |
+| `--stop-timeout`          |           | [API 1.25+](https://docs.docker.com/engine/api/v1.25/ "API 1.25+")<br>Timeout (in seconds) to stop a container |
+| `--storage-opt`           |           | Storage driver options for the container                     |
+| `--sysctl`                |           | Sysctl options                                               |
+| `--tmpfs`                 |           | Mount a tmpfs directory                                      |
+| `--tty , -t`              |           | Allocate a pseudo-TTY                                        |
+| `--ulimit`                |           | Ulimit options                                               |
+| `--user , -u`             |           | Username or UID (format: &lt;name\|uid&gt;\[:&lt;group\|gid&gt;\]) |
+| `--userns`                |           | User namespace to use                                        |
+| `--uts`                   |           | UTS namespace to use                                         |
+| `--volume , -v`           |           | Bind mount a volume                                          |
+| `--volume-driver`         |           | Optional volume driver for the container                     |
+| `--volumes-from`          |           | Mount volumes from the specified container(s)                |
+| `--workdir , -w`          |           | Working directory inside the container                       |
+
+[docker常用命令总结 - Wshile - 博客园](https://www.cnblogs.com/Wshile/p/12988720.html "docker常用命令总结 - Wshile - 博客园")
+
+```
+1.  -d, --detach=false 
+    
+2.  -i, --interactive=false 
+    
+3.  -t, --tty=false 
+    
+4.  -u, --user="" 
+    
+5.  -a, --attach=[] 
+    
+6.  -w, --workdir="" 
+    
+7.  -c, --cpu-shares=0 
+    
+8.  -e, --env=[] 
+    
+9.  -m, --memory="" 
+    
+10. -P, --publish-all=false 
+    
+11. -p, --publish=[] 
+    
+12. -h, --hostname="" 
+    
+13. -v, --volume=[] 
+    
+14. --volumes-from=[] 
+    
+15. --cap-add=[] 
+    
+16. --cap-drop=[] 
+    
+17. --cidfile="" 
+    
+18. --cpuset="" 
+    
+19. --device=[] 
+    
+20. --dns=[] 
+    
+21. --dns-search=[] 
+    
+22. --entrypoint="" 
+    
+23. --env-file=[] 
+    
+24. --expose=[] 
+    
+25. --link=[] 
+    
+26. --lxc-conf=[] 
+    
+27. --name="" 
+    
+28. --net="bridge" 
+    
+29.     bridge  
+    
+30.     host  
+    
+31.     container:NAME_or_ID > 
+    
+32.     none 
+    
+33. --privileged=false 
+    
+34. --restart="no" 
+    
+35.     no 
+    
+36.     on-failure 
+    
+37.     always 
+    
+38. --rm=false 
+    
+39. --sig-proxy=true 
+```
+
+\-\-\-
 
 # 9、code-server
 
@@ -639,6 +1021,24 @@ root
 admin
 ```
 
+docker
+
+```shell
+sudo docker run -d \
+  --name=syncthing \
+  --hostname=5600Linux `#optional` \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -p 8384:8384 \
+  -p 22000:22000/tcp \
+  -p 22000:22000/udp \
+  -p 21027:21027/udp \
+  -v /home/zzh/桌面/docker/syncthing/config:/config \
+  -v /home/zzh/桌面/syncthing:/data \
+  --restart unless-stopped \
+  lscr.io/linuxserver/syncthing:latest
+```
+
 
 
 # 20、minimalist-web-notepad
@@ -976,3 +1376,26 @@ admin@z
 Zzh125475
 ```
 
+# 26、待
+
+h5ai：文件服务器
+
+zdir：文件服务器
+
+FreshRSS：RSS订阅器
+
+oldiy-music：音乐服务器
+
+ airsonic：音乐服务器
+
+Navidrome： 音乐服务器
+
+chrome-novnc：浏览器
+
+Heimdall：仪表板、导航页
+
+WhiteBophir：电子白板
+
+snap2html：将文件结构保存
+
+Draw.io：流程图
