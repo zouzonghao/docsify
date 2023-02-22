@@ -12,3 +12,18 @@
 sudo xattr -d com.apple.quarantine <应用路径>
 ```
 
+# 4、filebrowser
+
+添加脚本
+
+startup.sh
+
+```
+#!/bin/bash
+
+cd /Users/macm2/Desktop/services/filebrowser
+nohup ./filebrowser &
+
+
+```
+
