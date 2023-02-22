@@ -929,7 +929,7 @@ Support for password authentication was removed on August 13, 2021_IT博客技�
 
 ![](linux.assets/fc798dd2d9cf4c2092f7d05b3c223b80.png)
 
-**2.7 生成后的token如下：**
+ **2.7 生成后的token如下：**
 
 ![](linux.assets/271e3904bf674cb09b95ecc3f065817e.png)
 
