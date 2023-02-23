@@ -716,6 +716,19 @@ docker run -d --name ddns-go --restart=always -p 9876:9876 -v /Users/macm2/Deskt
 
 # 12、filebrowser
 
+Linux:
+
+```
+docker run   -d --restart=always\
+    -v /home/zzh/桌面/filebrowser:/srv \
+    -p 44433:80 \
+	--name filebrowser \
+    filebrowser/filebrowser
+    
+```
+
+vps
+
 ```
 docker run   -d --restart=always\
     -v /docker/filebrowser:/srv \
@@ -1023,18 +1036,48 @@ admin
 
 docker
 
-```shell
-sudo docker run -d \
+```
+docker run -d \
   --name=syncthing \
   --hostname=5600Linux `#optional` \
-  -e PUID=1000 \
-  -e PGID=1000 \
+  -p 8384:8384 \
+  -p 22000:22000/tcp \
+  -p 22000:22000/udp \
+  -p 21027:21027/udp \
+  -v /home/zzh/桌面/docker/syncthing:/var/syncthing \
+  -v /home/zzh/桌面/filebrowser:/var/syncthing/data \
+  --restart=always \
+  syncthing/syncthing:latest
+```
+
+
+
+```shell
+docker run -d \
+  --name=syncthing \
+  --hostname=5600Linux `#optional` \
+  --user zzh\
   -p 8384:8384 \
   -p 22000:22000/tcp \
   -p 22000:22000/udp \
   -p 21027:21027/udp \
   -v /home/zzh/桌面/docker/syncthing/config:/config \
-  -v /home/zzh/桌面/syncthing:/data \
+  -v /home/zzh/桌面/filebrowser:/data \
+  --restart=always \
+  lscr.io/linuxserver/syncthing:latest
+```
+
+vps:
+
+```
+docker run -d \
+  --name=syncthing \
+  --hostname=VPS `#optional` \
+  -p 8384:8384 \
+  -p 22000:22000/tcp \
+  -p 22000:22000/udp \
+  -p 21027:21027/udp \
+  -v /docker/filebrowser:/data \
   --restart unless-stopped \
   lscr.io/linuxserver/syncthing:latest
 ```
@@ -1367,7 +1410,7 @@ git remote set-url origin https://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@githu
 docker run -d --restart=always \
   -p 44321:3000 \
   --name vocechat-server \
-  -v /docker/vocechat-server/data:/home/vocechat-server/data \
+  -v /home/zzh/桌面/docker/vocechat-server/data:/home/vocechat-server/data \
   privoce/vocechat-server:latest
 ```
 
