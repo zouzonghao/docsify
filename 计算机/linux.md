@@ -176,15 +176,15 @@ docker pull codehi/nginx:v1 拉取自己仓库的nginx镜像
 ​	docker stop `docker ps -a -q` 停止所有容器
 
 8. docker rm
-  删除一个或多个容器
-  docker rm mynginx 删除容器mynginx,正在运行中的容器需要stop后才能删除，或者使用强制删除。
-  docker rm -f mynginx 强制删除运行中的容器mynginx
-  docker rm `docker ps -a -q` 删除所有容器
+    删除一个或多个容器
+    docker rm mynginx 删除容器mynginx,正在运行中的容器需要stop后才能删除，或者使用强制删除。
+    docker rm -f mynginx 强制删除运行中的容器mynginx
+    docker rm `docker ps -a -q` 删除所有容器
 9. docker rmi
-  删除本地一个或多个镜像
-  docker rmi codehi/nginx:v1 删除镜像codehi/nginx:v1
-  docker rmi -f codehi/nginx:v1 强制删除
-  docker rmi `docker images -q` 删除所有镜像
+    删除本地一个或多个镜像
+    docker rmi codehi/nginx:v1 删除镜像codehi/nginx:v1
+    docker rmi -f codehi/nginx:v1 强制删除
+    docker rmi `docker images -q` 删除所有镜像
 10. docker logs
     获取容器的日志
     docker logs -f mynginx 跟踪容器mynginx的日志，实时输出的。
@@ -1441,4 +1441,4 @@ WhiteBophir：电子白板
 
 snap2html：将文件结构保存
 
-Draw.io：流程图
+Draw.io：流程图/
