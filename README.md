@@ -10,5 +10,7 @@
 
 - [mac](/计算机/mac.md)
 
+- [windows](/计算机/windows)
+
 - [算法](/计算机/华为机试.md)
 
